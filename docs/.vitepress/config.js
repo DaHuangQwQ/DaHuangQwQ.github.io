@@ -19,6 +19,7 @@ export default {
                     { text: 'process', link: '/os/process/01' },
                     { text: 'sperf', link: '/os/lpthread/sperf' },
                     { text: 'processTree', link: '/os/lpthread/processTree' },
+                    { text: 'crepl', link: '/os/lpthread/crepl' },
                 ]
             }
         ],
