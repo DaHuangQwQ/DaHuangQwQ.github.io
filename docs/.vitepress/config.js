@@ -17,6 +17,8 @@ export default {
                 items: [
                     { text: 'lpthread', link: '/os/lpthread/01' },
                     { text: 'process', link: '/os/process/01' },
+                    { text: 'sperf', link: '/os/lpthread/sperf' },
+                    { text: 'processTree', link: '/os/lpthread/processTree' },
                 ]
             }
         ],
