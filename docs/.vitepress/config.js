@@ -17,6 +17,10 @@ export default {
             {
                 text: "操作系统",
                 link: "/os/index"
+            },
+            {
+                text: "数据结构与算法",
+                link: "/algorithm/index"
             }
         ],
         socialLinks: [
