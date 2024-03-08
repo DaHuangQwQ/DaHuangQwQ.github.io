@@ -5,6 +5,7 @@
 #include <queue>
 #include <vector>
 using namespace std;
+#define ll long long
 typedef pair<int, int> PII;
 
 
