@@ -10,7 +10,7 @@ hero:
         link: /guide/start
       - theme: alt
         text: 在 GitHub 上查看
-        link: https://github.com/ox4f5da2
+        link: https://github.com/DaHuangQwQ
 features:
   - icon: 🛠️
     title: Simple and minimal, always

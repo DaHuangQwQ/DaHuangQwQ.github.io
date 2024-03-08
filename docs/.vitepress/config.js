@@ -16,19 +16,12 @@ export default {
             { text: "学习笔记", link: "/guide/test" },
             {
                 text: "操作系统",
-                // items: [
-                //     { text: 'lpthread', link: '/os/lpthread/01' },
-                //     { text: 'process', link: '/os/process/01' },
-                //     { text: 'sperf', link: '/os/lpthread/sperf' },
-                //     { text: 'processTree', link: '/os/lpthread/processTree' },
-                //     { text: 'crepl', link: '/os/lpthread/crepl' },
-                // ]
                 link: "/os/index"
             }
         ],
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
-            { icon: 'twitter', link: '...' },
+            { icon: 'github', link: 'https://github.com/DaHuangQwQ' },
+            // { icon: 'twitter', link: '...' },
         ],
         // footer: {
         //     message: 'footer',
