@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "remote":"bash ./remote.sh",
-    "docs:dev":"vitepress dev docs",
-    "docs:build":"vitepress build docs",
-    "docs:serve":"vitepress serve docs"
+    "remote": "bash ./remote.sh",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@yicode/yidocs-auto": "^1.3.30",
     "vitepress": "^1.0.0-rc.41",
     "vue": "^3.4.15"
+  },
+  "dependencies": {
+    "@iminu/vitepress-plugin-auto-sidebar": "^1.0.3",
+    "directory-tree": "^3.5.1"
   }
 }

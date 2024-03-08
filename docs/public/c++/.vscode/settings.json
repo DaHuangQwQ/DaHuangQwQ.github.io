@@ -1,0 +1,5 @@
+{
+    "cph.general.defaultLanguageTemplateFileLocation": "/Users/dahuang/Documents/hjywiki/docs/public/c++/_defaut.cpp",
+    "cph.language.cpp.Args": "-DLOCAL_MACHINE",
+    "C_Cpp.errorSquiggles": "disabled"
+}

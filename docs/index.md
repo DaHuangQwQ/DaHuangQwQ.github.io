@@ -1,10 +1,26 @@
 ---
-    layout: home
-    hero:
-        image: 
-            # src: /logo.png
-            alt: 前端吧
-    name: 前端吧
-    text: 关注web前端开发为主的博客网站和前端网址导航
-    tagline: 收集有一大批前端相关的技术网站，包括Vue、React等技术资料的生态网站，方便快速访问
+layout: home
+hero:
+    name: hjywiki
+    text: Vite & Vue powered static site generator.
+    tagline: Lorem ipsum...
+    actions:
+      - theme: brand
+        text: 开始使用
+        link: /guide/start
+      - theme: alt
+        text: 在 GitHub 上查看
+        link: https://github.com/ox4f5da2
+features:
+  - icon: 🛠️
+    title: Simple and minimal, always
+    details: Lorem ipsum...
+    link: /guide/start
+    linkText: 了解更多
+  - icon: ⚡️
+    title: Another cool feature
+    details: Lorem ipsum...
+  - icon: 🌞
+    title: Another cool feature
+    details: Lorem ipsum...
 ---
