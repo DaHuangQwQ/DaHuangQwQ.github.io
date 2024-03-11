@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@iminu/vitepress-plugin-auto-sidebar": "^1.0.3",
-    "directory-tree": "^3.5.1"
+    "directory-tree": "^3.5.1",
+    "path-browserify": "^1.0.1"
   }
 }
