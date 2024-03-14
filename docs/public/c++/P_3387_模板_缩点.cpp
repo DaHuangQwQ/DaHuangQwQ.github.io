@@ -24,25 +24,28 @@ typedef pair<int, int> PII;
 
 
 const int N = 1e5 + 10;
-// https://www.luogu.com.cn/problem/P2341
+// https://www.luogu.com.cn/problem/P3387
 int n, m;
-
 //
 struct Edge{
     int to, next;
-} e[N << 1];
-int head[N];
+} e[N << 1], ne[N << 1];
+int head[N], nhead[N];
 void add(int u, int v){
     static int idx = 0;
     e[++idx] = (Edge){v, head[u]};
     head[u] = idx;
 }
-
+void nadd(int u, int v){
+    static int idx = 0;
+    ne[++idx] = (Edge){v, nhead[u]};
+    nhead[u] = idx;
+}
 //
+
 int dfn[N], low[N], dfncnt;
 int stk[N], instk[N], top;
-int scc[N], siz[N], cnt;
-
+int scc[N], cnt;
 void tarjan(int u){
     dfn[u] = low[u] = ++dfncnt;
     stk[++top] = u;
@@ -52,7 +55,7 @@ void tarjan(int u){
         if(!dfn[v]){
             tarjan(v);
             low[u] = min(low[u], low[v]);
-        } else {
+        }else if(instk[v]){
             low[u] = min(low[u], dfn[v]);
         }
     }
@@ -62,37 +65,40 @@ void tarjan(int u){
             v = stk[top--];
             instk[v] = 0;
             scc[v] = cnt;
-            siz[cnt]++;
-         } while(v != u);
+        } while(u != v);
     }
 }
 
-int din[N], dout[N];
+int w[N], nw[N], dp[N];
 
 void solve(){
     cin >> n >> m;
+    for(int i = 1;i <= n;i++) cin >> w[i];
     for(int i = 1;i <= m;i++){
         int u,v; cin >> u >> v;
         add(u, v);
     }
     for(int i = 1;i <= n;i++) if(!dfn[i]) tarjan(i);
     for(int u = 1;u <= n;u++){
+        nw[scc[u]] += w[u];
         for(int i = head[u];i;i = e[i].next){
             int v = e[i].to;
             if(scc[u] == scc[v]) continue;
-            din[scc[v]]++;
-            dout[scc[u]]++;
+            nadd(scc[u], scc[v]);
         }
     }
-    int res = 0, zero = 0;
+    for(int u = cnt;u;u--){ // 思考： 为什么 cnt 开始遍历
+        if(dp[u] == 0) dp[u] = nw[u];
+
+        for(int i = nhead[u];i;i = ne[i].next){
+            int v = ne[i].to;
+            dp[v] = max(dp[v], dp[u] + nw[v]);
+        }
+    }
+    int res = 0;
     for(int i = 1;i <= cnt;i++){
-        if(dout[i] == 0) {
-            res = siz[i];
-            zero++;
-        }
+        res = max(res, dp[i]);
     }
-    if(zero > 1) cout << 0 << endl;
-    else
     cout << res << endl;
 }
 
