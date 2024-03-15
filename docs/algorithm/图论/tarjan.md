@@ -206,200 +206,6 @@ signed main(){
 
 
 
-
-
-## tarjan 割点
-
-> **割点**：对于一个无向图，如果把一个点删除后，连通块的个数增加了，那么这个点就是割点（又称割项）。
-
-
-
-> 割点判定法则：
->
-> 如果 × 不是根节点，当搜索树上存在×的一个子节点y，满足low[y] ≥ dfn[x]，那么x就是割点。
->
-> 如果 x 是根节点，当搜索树上存在至少两个子节点y1,y2，满足上述条件，那么×就是割点。
->
-> low[y] ≥ dfn[x]，说明从 y 出发，在不通过 x 点的前提下，不管走哪条边，都无法到达比×更早访问的节点。
->
-> 故删除 × 点后，以y为根的子树 subtree() 也就断开了。即环顶的点割得掉。
->
-> 反之，若low[y] < dfn[x]，则说明 y 能绕行其他边到达比 × 更早访问的节点，x就不是割点了。即环内的点割不掉。
-
-
-
-### 题面翻译
-
-B 城有 $n$ 个城镇，$m$ 条双向道路。
-
-每条道路连结两个不同的城镇，没有重复的道路，所有城镇连通。
-
-把城镇看作节点，把道路看作边，容易发现，整个城市构成了一个无向图。
-
-请你对于每个节点 $i$ 求出，把与节点 $i$ 关联的所有边去掉以后（不去掉节点 $i$ 本身），无向图有多少个有序点 $(x,y)$，满足 $x$ 和 $y$ 不连通。
-
-**【输入格式】**
-
-第一行包含两个整数 $n$ 和 $m$。
-
-接下来 $m$ 行，每行包含两个整数 $a$ 和 $b$，表示城镇 $a$ 和 $b$ 之间存在一条道路。
-
-**【输出格式】**
-
-输出共 $n$ 行，每行输出一个整数。
-
-第 $i$ 行输出的整数表示把与节点 $i$ 关联的所有边去掉以后（不去掉节点 $i$ 本身），无向图有多少个有序点 $(x,y)$，满足 $x$ 和 $y$ 不连通。
-
-
-
-```cpp
-const int N = 1e6 + 10;
-// https://www.luogu.com.cn/problem/P3469
-
-int n,m;
-struct Edge {
-    int to, next;
-} e[N << 1];
-int head[N];
-void add(int u, int v){
-    static int idx = 0;
-    e[++idx] = (Edge){v, head[u]};
-    head[u] = idx;
-}
-//
-int dfn[N], low[N], siz[N], dfncnt;
-bool res[N];
-int ans[N];
-void tarjan(int u, bool root){
-    dfn[u] = low[u] = ++dfncnt;
-    ans[u] = 0;
-    int son = 0;
-    siz[u] = 1;
-    int sum = 0;
-    for(int i = head[u];i;i = e[i].next){
-        int v = e[i].to;
-        if(!dfn[v]){
-            son ++;
-            tarjan(v, false);
-            low[u] = min(low[u], low[v]);
-            siz[u] += siz[v];
-            if(low[v] >= dfn[u]) {
-                res[u] = true;
-                sum += siz[v];
-                ans[u] += siz[v] * (n - siz[v]);
-            }
-        }else low[u] = min(low[u], dfn[v]);
-    }
-    if(son >= 2 && root) res[u] = true;
-    if(son < 2 && root) res[u] = false;
-    if(res[u]) ans[u] += (n - sum - 1) * (sum + 1) + (n - 1);
-}
-
-void solve(){
-    cin >> n >> m;
-    for(int i = 0, u, v;i <= m;i++){
-        cin >> u >> v;
-        add(u,v);
-        add(v,u);
-    }
-    for(int i = 1;i <= n;i++) if(!dfn[i]) tarjan(i, true);
-    for(int i = 1;i <= n;i++){
-        if(res[i]){
-            cout << ans[i] << endl;
-        }else{
-            cout << 2 * (n - 1) << endl;
-        }
-    }
-}
-
-signed main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);cout.tie(0);
-    int n = 1;
-    // cin >> n;
-    while(n--){
-        solve();
-    }
-    return 0;
-}
-```
-
-
-
-
-
-```cpp
-const int N = 1e5 + 10;
-// https://www.luogu.com.cn/problem/P2863
-
-int n, m, a, b;
-vector<int> e[N];
-int dfn[N], low[N], tot;
-int stk[N], instk[N], top;
-int scc[N], siz[N], cnt;
-
-void tarjan(int x)
-{
-    // 入x时，盖戳、入栈
-    dfn[x] = low[x] = ++tot;
-    stk[++top] = x, instk[x] = 1;
-    for (int y : e[x])
-    {
-        if (!dfn[y])
-        { // 若y尚未访问
-            tarjan(y);
-            low[x] = min(low[x], low[y]); // 回x时更新low
-        }
-        else if (instk[y])                // 若y已访问且在栈中
-            low[x] = min(low[x], dfn[y]); // 在x时更新low
-    }
-    // 离x时，收集SCC
-    if (dfn[x] == low[x])
-    { // 若x是SCC的根
-        int y;
-        ++cnt;
-        do
-        {
-            y = stk[top--];
-            instk[y] = 0;
-            scc[y] = cnt; // SCC编号
-            ++siz[cnt];   // SCC大小
-        } while (y != x);
-    }
-}
-
-void solve()
-{
-    cin >> n >> m;
-    while (m--)
-        cin >> a >> b, e[a].push_back(b);
-    for (int i = 1; i <= n; i++) // 可能不连通
-        if (!dfn[i])
-            tarjan(i);
-    int ans = 0;
-    for (int i = 1; i <= cnt; i++)
-        if (siz[i] > 1)
-            ans++;
-    cout << ans << endl;
-}
-
-signed main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n = 1;
-    // cin >> n;
-    while (n--)
-    {
-        solve();
-    }
-    return 0;
-}
-```
-
-
-
 ## Tarjan scc 缩点
 
 > 把有环图抽象成无环图
@@ -692,7 +498,199 @@ signed main(){
 
 
 
-## 割边
+## tarjan 割点
+
+> **割点**：对于一个无向图，如果把一个点删除后，连通块的个数增加了，那么这个点就是割点（又称割项）。
+
+
+
+> 割点判定法则：
+>
+> 如果 × 不是根节点，当搜索树上存在×的一个子节点y，满足low[y] ≥ dfn[x]，那么x就是割点。
+>
+> 如果 x 是根节点，当搜索树上存在至少两个子节点y1,y2，满足上述条件，那么×就是割点。
+>
+> low[y] ≥ dfn[x]，说明从 y 出发，在不通过 x 点的前提下，不管走哪条边，都无法到达比×更早访问的节点。
+>
+> 故删除 × 点后，以y为根的子树 subtree() 也就断开了。即环顶的点割得掉。
+>
+> 反之，若low[y] < dfn[x]，则说明 y 能绕行其他边到达比 × 更早访问的节点，x就不是割点了。即环内的点割不掉。
+
+
+
+### 题面翻译
+
+B 城有 $n$ 个城镇，$m$ 条双向道路。
+
+每条道路连结两个不同的城镇，没有重复的道路，所有城镇连通。
+
+把城镇看作节点，把道路看作边，容易发现，整个城市构成了一个无向图。
+
+请你对于每个节点 $i$ 求出，把与节点 $i$ 关联的所有边去掉以后（不去掉节点 $i$ 本身），无向图有多少个有序点 $(x,y)$，满足 $x$ 和 $y$ 不连通。
+
+**【输入格式】**
+
+第一行包含两个整数 $n$ 和 $m$。
+
+接下来 $m$ 行，每行包含两个整数 $a$ 和 $b$，表示城镇 $a$ 和 $b$ 之间存在一条道路。
+
+**【输出格式】**
+
+输出共 $n$ 行，每行输出一个整数。
+
+第 $i$ 行输出的整数表示把与节点 $i$ 关联的所有边去掉以后（不去掉节点 $i$ 本身），无向图有多少个有序点 $(x,y)$，满足 $x$ 和 $y$ 不连通。
+
+
+
+```cpp
+const int N = 1e6 + 10;
+// https://www.luogu.com.cn/problem/P3469
+
+int n,m;
+struct Edge {
+    int to, next;
+} e[N << 1];
+int head[N];
+void add(int u, int v){
+    static int idx = 0;
+    e[++idx] = (Edge){v, head[u]};
+    head[u] = idx;
+}
+//
+int dfn[N], low[N], siz[N], dfncnt;
+bool res[N];
+int ans[N];
+void tarjan(int u, bool root){
+    dfn[u] = low[u] = ++dfncnt;
+    ans[u] = 0;
+    int son = 0;
+    siz[u] = 1;
+    int sum = 0;
+    for(int i = head[u];i;i = e[i].next){
+        int v = e[i].to;
+        if(!dfn[v]){
+            son ++;
+            tarjan(v, false);
+            low[u] = min(low[u], low[v]);
+            siz[u] += siz[v];
+            if(low[v] >= dfn[u]) {
+                res[u] = true;
+                sum += siz[v];
+                ans[u] += siz[v] * (n - siz[v]);
+            }
+        }else low[u] = min(low[u], dfn[v]);
+    }
+    if(son >= 2 && root) res[u] = true;
+    if(son < 2 && root) res[u] = false;
+    if(res[u]) ans[u] += (n - sum - 1) * (sum + 1) + (n - 1);
+}
+
+void solve(){
+    cin >> n >> m;
+    for(int i = 0, u, v;i <= m;i++){
+        cin >> u >> v;
+        add(u,v);
+        add(v,u);
+    }
+    for(int i = 1;i <= n;i++) if(!dfn[i]) tarjan(i, true);
+    for(int i = 1;i <= n;i++){
+        if(res[i]){
+            cout << ans[i] << endl;
+        }else{
+            cout << 2 * (n - 1) << endl;
+        }
+    }
+}
+
+signed main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int n = 1;
+    // cin >> n;
+    while(n--){
+        solve();
+    }
+    return 0;
+}
+```
+
+
+
+
+
+```cpp
+const int N = 1e5 + 10;
+// https://www.luogu.com.cn/problem/P2863
+
+int n, m, a, b;
+vector<int> e[N];
+int dfn[N], low[N], tot;
+int stk[N], instk[N], top;
+int scc[N], siz[N], cnt;
+
+void tarjan(int x)
+{
+    // 入x时，盖戳、入栈
+    dfn[x] = low[x] = ++tot;
+    stk[++top] = x, instk[x] = 1;
+    for (int y : e[x])
+    {
+        if (!dfn[y])
+        { // 若y尚未访问
+            tarjan(y);
+            low[x] = min(low[x], low[y]); // 回x时更新low
+        }
+        else if (instk[y])                // 若y已访问且在栈中
+            low[x] = min(low[x], dfn[y]); // 在x时更新low
+    }
+    // 离x时，收集SCC
+    if (dfn[x] == low[x])
+    { // 若x是SCC的根
+        int y;
+        ++cnt;
+        do
+        {
+            y = stk[top--];
+            instk[y] = 0;
+            scc[y] = cnt; // SCC编号
+            ++siz[cnt];   // SCC大小
+        } while (y != x);
+    }
+}
+
+void solve()
+{
+    cin >> n >> m;
+    while (m--)
+        cin >> a >> b, e[a].push_back(b);
+    for (int i = 1; i <= n; i++) // 可能不连通
+        if (!dfn[i])
+            tarjan(i);
+    int ans = 0;
+    for (int i = 1; i <= cnt; i++)
+        if (siz[i] > 1)
+            ans++;
+    cout << ans << endl;
+}
+
+signed main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n = 1;
+    // cin >> n;
+    while (n--)
+    {
+        solve();
+    }
+    return 0;
+}
+```
+
+
+
+## tarjan 割边
 
 > 割边：对于一个无向图，如果删掉一条边后图中的连通块个数增加了，则称这条边为桥或者割边。
 
