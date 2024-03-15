@@ -36,7 +36,7 @@ void solve(){
 
 signed main(){
     #ifdef ONLINE_JUDGE
-    freopen("", "r", stdin);
+    // freopen("", "r", stdin);
     #endif
     ios::sync_with_stdio(false);
     cin.tie(0);cout.tie(0);

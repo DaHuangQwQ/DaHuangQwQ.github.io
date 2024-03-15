@@ -719,6 +719,70 @@ signed main(){
 >
 > eDCC -> 缩点 所得的图一定是树（或森林），树边就是原来的割边
 
+```cpp
+const int N = 1e5 + 10;
+// https://www.luogu.com.cn/problem/P2860
+int n, m;
+//
+struct Edge{
+    int to, next;
+} e[N << 1];
+int head[N], idx = 1;
+void add(int u, int v){
+    // static int idx = 0;
+    e[++idx] = (Edge) {v, head[u]};
+    head[u] = idx;
+}
+//
+int dfn[N], low[N], dfncnt;
+int bri[N], d[N];
+int dcc[N], cnt;
+int stk[N], intstk[N], top;
+void tarjan(int u, int in_edge){
+    dfn[u] = low[u] = ++dfncnt;
+    stk[++top] = u;
+    for(int i = head[u];i;i = e[i].next){
+        int v = e[i].to;
+        if(!dfn[v]){
+            tarjan(v, i);
+            low[u] = min(low[u], low[v]);
+            if(low[v] > dfn[u]){
+                bri[i] = bri[i^1] = true;
+            }
+        }else if (i != (in_edge^1)){
+            low[u] = min(low[u], dfn[v]);
+        }
+    }
+    if(dfn[u] != low[u]) return;
+    int v = -1;
+    cnt++;
+    while(v != u){
+        v = stk[top--];
+        dcc[v] = cnt;
+    }
+}
+
+void solve(){
+    cin >> n >> m;
+    for(int i = 1;i <= m;i++){
+        int u,v; cin >> u >> v;
+        add(u, v);
+        add(v, u);
+    }
+    for(int i = 1;i <= n;i++) if(!dfn[i]) tarjan(i, 0);
+    for(int i = 2;i <= idx;i++){ // 为什么 i 从 2 开始 遍历 ? 为了满足 i^1 的计算
+        if(bri[i]){
+            d[dcc[e[i].to]]++;
+        }
+    }
+    int sum = 0;
+    for(int i = 1;i <= cnt;i++){
+        if(d[i] == 1) sum ++;
+    }
+    cout << (sum + 1) / 2 << endl;
+}
+```
+
 
 
 ## 点双连通分量 vDCC 缩点
@@ -729,3 +793,76 @@ signed main(){
 
 - 无向图中**极大的不包含割点的连通分量**被称为**点双连通分量(vertex Double Connected Components，vDCC)**。
 - **一个割点存在于至少两个双连通分量之中**
+
+```cpp
+const int N = 2e6 + 10;
+// https://www.luogu.com.cn/problem/P8435
+int n, m;
+//
+struct Edge{
+    int to, next;
+} e[N << 1];
+int head[N];
+void add(int u, int v){
+    static int idx = 0;
+    e[++idx] = (Edge){v, head[u]};
+    head[u] = idx;
+}
+//
+int dfn[N], low[N], dfncnt;
+int stk[N], instk[N], top;
+vector<int> dcc[N];
+int cnt, root, cut[N];
+void tarjan(int u){
+    dfn[u] = low[u] = ++dfncnt;
+    stk[++top] = u;
+    instk[u] = 1;
+    if(head[u] == 0){
+        dcc[++cnt].push_back(u);
+        return;
+    }
+    int son = 0;
+    for(int i = head[u];i;i = e[i].next){
+        int v = e[i].to;
+        if(!dfn[v]){
+            tarjan(v);
+            low[u] = min(low[u], low[v]);
+            if(low[v] >= dfn[u]){
+                son++;
+                if(u != root){
+                    cut[u] = true;
+                }
+                cnt++;
+                while(true){
+                    int z = stk[top--];
+                    dcc[cnt].push_back(z);
+                    if(z == v) break;
+                }
+                dcc[cnt].push_back(u);
+            }
+        }else {
+            low[u] = min(low[u], dfn[v]);
+        }
+    }
+    if(root == u && son == 0) dcc[++cnt].push_back(u);
+}
+
+
+void solve(){
+    cin >> n >> m;
+    for(int i = 1;i <= m;i++){
+        int u, v; cin >> u >> v;
+        add(u, v);
+        add(v, u);
+    }
+    for(int i = 1;i <= n;i++) if(!dfn[i]) root = i, tarjan(i);
+    cout << cnt << endl;
+    for(int i = 1;i <= cnt;i++){
+        cout << dcc[i].size() << " ";
+        for(auto p : dcc[i]){
+            cout << p << " ";
+        }cout << endl;
+    }
+}
+```
+
