@@ -137,31 +137,6 @@ if (dfn[i]):  # 已经被处理过
 ## 割点模版
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-
-
-#ifdef LOCAL_MACHINE
-	#define debug(format, arg...) printf(format, ##arg)
-	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-	#define debug(format, arg...);
-	#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s) \
-	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
-
-
 const int N = 1e5 + 10;
 // https://www.luogu.com.cn/problem/P3388
 
@@ -278,32 +253,6 @@ B 城有 $n$ 个城镇，$m$ 条双向道路。
 
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <stdio.h>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-#define int ll
-
-#ifdef LOCAL_MACHINE
-	#define debug(format, arg...) printf(format, ##arg)
-	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-	#define debug(format, arg...);
-	#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s) \
-	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
-
-
 const int N = 1e6 + 10;
 // https://www.luogu.com.cn/problem/P3469
 
@@ -380,36 +329,6 @@ signed main(){
 
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-
-#ifdef LOCAL_MACHINE
-#define debug(format, arg...) printf(format, ##arg)
-#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-#define debug(format, arg...) ;
-#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s)          \
-    do                         \
-    {                          \
-        if ((x) == 0)          \
-        {                      \
-            printf("%s\n", s); \
-            assert((x));       \
-        }                      \
-    } while (0)
-
 const int N = 1e5 + 10;
 // https://www.luogu.com.cn/problem/P2863
 
@@ -508,31 +427,6 @@ signed main()
 第二行一个整数，表示至少要添加几条线路能使任意一所学校作为母机都可以使别的学校使用上软件。
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-
-
-#ifdef LOCAL_MACHINE
-	#define debug(format, arg...) printf(format, ##arg)
-	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-	#define debug(format, arg...);
-	#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s) \
-	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
-
-
 const int N = 1e5 + 10;
 // https://www.luogu.com.cn/problem/P2812
 
@@ -611,31 +505,6 @@ signed main(){
 每头奶牛都梦想成为牛棚里的明星。被所有奶牛喜欢的奶牛就是一头明星奶牛。所有奶牛都是自恋狂，每头奶牛总是喜欢自己的。奶牛之间的“喜欢”是可以传递的——如果 $A$ 喜欢 $B$，$B$ 喜欢 $C$，那么 $A$ 也喜欢 $C$。牛栏里共有 $N$ 头奶牛，给定一些奶牛之间的爱慕关系，请你算出有多少头奶牛可以当明星。
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-
-
-#ifdef LOCAL_MACHINE
-	#define debug(format, arg...) printf(format, ##arg)
-	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-	#define debug(format, arg...);
-	#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s) \
-	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
-
-
 const int N = 1e5 + 10;
 // https://www.luogu.com.cn/problem/P2341
 int n, m;
@@ -730,31 +599,6 @@ signed main(){
 允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。
 
 ```cpp
-// #include<bits/stdc++.h>
-#include <iostream>
-#include <assert.h>
-#include <algorithm>
-#include <cstring>
-#include <queue>
-#include <vector>
-using namespace std;
-#define ll long long
-#define endl "\n"
-typedef pair<int, int> PII;
-
-
-#ifdef LOCAL_MACHINE
-	#define debug(format, arg...) printf(format, ##arg)
-	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-	#define debug(format, arg...);
-	#define debug_info(format, ...)
-#endif
-
-#define zassert(x, s) \
-	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
-
-
 const int N = 1e5 + 10;
 // https://www.luogu.com.cn/problem/P3387
 int n, m;
@@ -874,3 +718,14 @@ signed main(){
 > 无向图中极大的不包含割边的连通块被称“边双连通分量"。
 >
 > eDCC -> 缩点 所得的图一定是树（或森林），树边就是原来的割边
+
+
+
+## 点双连通分量 vDCC 缩点
+
+在无向图中，存在一个极大子图，其中**任意两个顶点之间连通**，并且删除任意一点该子图**仍然是连通的**，我们称该极大子图为**点双连通分量(vertex Double Connected Components，vDCC)**。
+
+#### 推论
+
+- 无向图中**极大的不包含割点的连通分量**被称为**点双连通分量(vertex Double Connected Components，vDCC)**。
+- **一个割点存在于至少两个双连通分量之中**
