@@ -1,10 +1,14 @@
-// #include<bits/stdc++.h>
+#ifdef ONLINE_JUDGE
+#include<bits/stdc++.h>
+#else
 #include <iostream>
+#include <stdio.h>
 #include <assert.h>
 #include <algorithm>
 #include <cstring>
 #include <queue>
 #include <vector>
+#endif
 using namespace std;
 #define ll long long
 #define endl "\n"
@@ -31,6 +35,9 @@ void solve(){
 }
 
 signed main(){
+    #ifdef ONLINE_JUDGE
+    freopen("", "r", stdin);
+    #endif
     ios::sync_with_stdio(false);
     cin.tie(0);cout.tie(0);
     int n = 1;
