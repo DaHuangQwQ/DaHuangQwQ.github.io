@@ -1,6 +1,6 @@
 # We_Need_More_Bosses
 
-<link rel="stylesheet" href="./_index.css">
+<link rel="stylesheet" href="/cpp/_index.css">
 
 ```cpp
 #ifdef ONLINE_JUDGE

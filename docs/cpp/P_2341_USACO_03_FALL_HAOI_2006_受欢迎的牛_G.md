@@ -1,6 +1,6 @@
 # P_2341_USACO_03_FALL_HAOI_2006_受欢迎的牛_G
 
-<link rel="stylesheet" href="./_index.css">
+<link rel="stylesheet" href="/cpp/_index.css">
 
 ```cpp
 // #include<bits/stdc++.h>
