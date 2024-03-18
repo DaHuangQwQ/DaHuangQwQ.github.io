@@ -6,12 +6,12 @@
 	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
 	// Placeholders with the same ids are connected.
 	// Example:
-	"// code": {
-		"scope": "cpp, c++",
-		"prefix": "// tip",
-		"body": [
-			"// [!code warning]"
-		],
-		"description": "format"
-	}
+	// "// code": {
+	// 	"scope": "cpp, c++",
+	// 	"prefix": "// tip",
+	// 	"body": [
+	// 		"// [!code warning]"
+	// 	],
+	// 	"description": "format"
+	// }
 }
