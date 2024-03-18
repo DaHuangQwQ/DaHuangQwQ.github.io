@@ -1,6 +1,6 @@
 # P_2863_USACO_06_JAN_The_Cow_Prom_S
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

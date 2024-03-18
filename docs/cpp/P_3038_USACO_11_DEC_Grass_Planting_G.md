@@ -1,6 +1,6 @@
 # P_3038_USACO_11_DEC_Grass_Planting_G
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

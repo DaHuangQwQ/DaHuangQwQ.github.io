@@ -1,6 +1,6 @@
 # We_Need_More_Bosses
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

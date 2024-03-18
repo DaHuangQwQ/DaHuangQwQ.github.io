@@ -1,6 +1,6 @@
 # Shichikuji_and_Power_Grid
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

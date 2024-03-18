@@ -1,6 +1,6 @@
 # P_2860_USACO_06_JAN_Redundant_Paths_G
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

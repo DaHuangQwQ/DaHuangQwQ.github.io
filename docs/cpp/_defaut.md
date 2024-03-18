@@ -1,6 +1,6 @@
 # _defaut
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

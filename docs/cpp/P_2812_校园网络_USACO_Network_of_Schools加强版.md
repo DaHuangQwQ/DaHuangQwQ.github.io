@@ -1,6 +1,6 @@
 # P_2812_校园网络_USACO_Network_of_Schools加强版
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 

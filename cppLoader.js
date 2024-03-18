@@ -13,7 +13,7 @@ files.forEach(file => {
 
     const markdownContent = `# ${file.split('.')[0]}
 
-<style>
+<style scoped>
 @import '/public/css/cpp.css';
 </style>
 
