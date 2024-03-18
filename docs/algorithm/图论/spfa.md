@@ -4,11 +4,6 @@
 > 双端队列优化的 spfa 算法
 
 ```cpp
-#include <iostream>
-#include <deque>
-#include <cstring>
-#include <vector>
-using namespace std;
 const int N = 10010;
 const int M = 2 * N;
 struct edge{int to,w;};
