@@ -1,6 +1,6 @@
 # P_2812_校园网络_USACO_Network_of_Schools加强版
 
-<link rel="stylesheet" href="/cpp/_index.css">
+<link rel="stylesheet" href="/public/css/cpp.css">
 
 ```cpp
 // #include<bits/stdc++.h>
