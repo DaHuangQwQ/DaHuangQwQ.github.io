@@ -1,6 +1,9 @@
 # _defaut
 
-<link rel="stylesheet" href="/public/css/cpp.css">
+<style>
+@import '/public/css/cpp.css';
+</style>
+
 
 ```cpp
 #ifdef ONLINE_JUDGE

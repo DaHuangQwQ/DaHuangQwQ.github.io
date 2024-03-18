@@ -13,7 +13,10 @@ files.forEach(file => {
 
     const markdownContent = `# ${file.split('.')[0]}
 
-<link rel="stylesheet" href="/public/css/cpp.css">
+<style>
+@import '/public/css/cpp.css';
+</style>
+
 
 \`\`\`cpp\n${fileContent}\n\`\`\`
     `;

@@ -1,6 +1,9 @@
 # P_3038_USACO_11_DEC_Grass_Planting_G
 
-<link rel="stylesheet" href="/public/css/cpp.css">
+<style>
+@import '/public/css/cpp.css';
+</style>
+
 
 ```cpp
 // #include<bits/stdc++.h>
