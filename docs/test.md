@@ -76,6 +76,3 @@ const line3 = 'This is line 3'
 const line4 = 'This is line 4'
 ```
 
-
-
-

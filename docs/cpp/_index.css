@@ -1,0 +1,9 @@
+.text{
+    font-size: 12px !important;
+    line-height: 16px !important;
+    white-space: nowrap;
+}
+
+.line{
+    font-size: 12px !important;
+}

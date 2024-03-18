@@ -14,7 +14,14 @@ export default {
     },
     themeConfig: {
         nav: [
-            { text: "学习笔记", link: "/guide/test" },
+            {
+                text: "资源",
+                link: "/cpp/index"
+            },
+            {
+                text: "学习笔记",
+                link: "/guide/test"
+            },
             {
                 text: "操作系统",
                 link: "/os/index"
@@ -35,7 +42,7 @@ export default {
 
     },
     vite: {
-        plugins:[
+        plugins: [
             AutoSidebar(),
         ]
     }
