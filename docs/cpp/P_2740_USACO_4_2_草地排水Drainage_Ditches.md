@@ -112,13 +112,6 @@ void solve(){
         int u, v, w; cin >> u >> v >> w;
         add(u,v,w);
         add(v,u,0);
-        // if(flag[u][v]==0) {  //处理重边的操作（加上这个模板题就可以用Ek算法过了） 
-		// 	add(u,v,w);
-        //     add(v,u,0);
-		// 	flag[u][v]=idx;
-        // }else {
-		// 	e[flag[u][v]-1].w+=w;
-		// }
     }
     cout << dinic() << endl;
 }
