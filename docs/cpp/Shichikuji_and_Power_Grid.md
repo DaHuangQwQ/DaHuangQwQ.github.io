@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./_index.css">
-
 # Shichikuji_and_Power_Grid
+
+<link rel="stylesheet" href="./_index.css">
 
 ```cpp
 // #include<bits/stdc++.h>

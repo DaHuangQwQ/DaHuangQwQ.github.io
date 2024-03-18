@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./_index.css">
-
 # P_2863_USACO_06_JAN_The_Cow_Prom_S
+
+<link rel="stylesheet" href="./_index.css">
 
 ```cpp
 // #include<bits/stdc++.h>

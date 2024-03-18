@@ -11,9 +11,9 @@ files.forEach(file => {
     const filePath = path.join(cppFilesDir, file);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-    const markdownContent = `<link rel="stylesheet" href="./_index.css">
+    const markdownContent = `# ${file.split('.')[0]}
 
-# ${file.split('.')[0]}
+<link rel="stylesheet" href="./_index.css">
 
 \`\`\`cpp\n${fileContent}\n\`\`\`
     `;

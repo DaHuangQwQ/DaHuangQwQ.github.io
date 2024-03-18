@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./_index.css">
-
 # P_3469_POI_2008_BLO_Blockade
+
+<link rel="stylesheet" href="./_index.css">
 
 ```cpp
 // #include<bits/stdc++.h>

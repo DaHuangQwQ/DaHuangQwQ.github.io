@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./_index.css">
-
 # P_2860_USACO_06_JAN_Redundant_Paths_G
+
+<link rel="stylesheet" href="./_index.css">
 
 ```cpp
 #ifdef ONLINE_JUDGE

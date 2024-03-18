@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./_index.css">
-
 # _defaut
+
+<link rel="stylesheet" href="./_index.css">
 
 ```cpp
 #ifdef ONLINE_JUDGE
