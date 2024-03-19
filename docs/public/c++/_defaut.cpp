@@ -12,6 +12,7 @@
 using namespace std;
 #define ll long long
 #define endl "\n"
+#define INF 1e9
 typedef pair<int, int> PII;
 
 
