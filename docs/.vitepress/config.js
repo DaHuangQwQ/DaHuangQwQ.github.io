@@ -6,6 +6,7 @@ export default {
     description: '编程笔记', // mate 标签 description，多用于搜索引擎抓取摘要
     markdown: {
         // lineNumbers: true,
+        
         image: {
             // 默认禁用图片懒加载
             lazyLoading: true
@@ -24,7 +25,7 @@ export default {
             },
             {
                 text: "操作系统",
-                link: "/os/index"
+                link: "/system/index"
             },
             {
                 text: "算法",
