@@ -23,7 +23,6 @@ using namespace std;
 #define INF 1e9
 typedef pair<int, int> PII;
 
-
 #ifdef LOCAL_MACHINE
 	#define debug(format, arg...) printf(format, ##arg)
 	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -35,8 +34,8 @@ typedef pair<int, int> PII;
 #define zassert(x, s) \
 	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
 
-
 const int N = 1e5 + 10;
+// 
 
 
 void solve(){
@@ -47,13 +46,10 @@ signed main(){
     #ifdef ONLINE_JUDGE
     // freopen("", "r", stdin);
     #endif
-    ios::sync_with_stdio(false);
-    cin.tie(0);cout.tie(0);
+    ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     int n = 1;
     // cin >> n;
-    while(n--){
-        solve();
-    }
+    while(n--){solve();}
     return 0;
 }
 ```

@@ -13,7 +13,7 @@ using namespace std;
 #define ll long long
 #define endl "\n"
 typedef pair<int, int> PII;
-#define int long long
+
 
 #ifdef LOCAL_MACHINE
 	#define debug(format, arg...) printf(format, ##arg)
@@ -53,6 +53,7 @@ int scc[N], cnt;
 void tarjan(int u, int in_edge){
     dfn[u] = low[u] = ++dfncnt;
     stk[++top] = u;
+    instk[u] = true;
     for(int i = head[u];i;i = e[i].next){
         int v = e[i].to;
         if(!dfn[v]){
@@ -61,7 +62,7 @@ void tarjan(int u, int in_edge){
             if(low[v] > dfn[u]){
                 bri[i] = bri[i^1] = true;
             }
-        }else if(i != in_edge^1){ // 不是反边
+        }else if(instk[v]){ // 不是反边
             low[u] = min(low[u], dfn[v]);
         }
     }
@@ -70,6 +71,7 @@ void tarjan(int u, int in_edge){
         cnt++;
         while(v != u){
             v = stk[top--];
+            instk[v] = false;
             scc[v] = cnt;
         }
     }
@@ -88,7 +90,7 @@ int bfs(int u){
         q.pop();
         for(int i = nhead[u];i;i = ne[i].next){
             int v = ne[i].to;
-            if(dis[v] != 0x3f3f3f3f3f3f3f3f) continue;
+            if(dis[v] != 0x3f3f3f3f) continue;
             dis[v] = dis[u] + 1;
             if(dis[v] > dis[u]) res = v;
             q.push(v);
@@ -103,15 +105,14 @@ void solve(){
         int u,v; cin >> u >> v;
         add(u,v); add(v,u);
     }
-    for(int i = 1;i <= n;i++) if(!dfn[i]) tarjan(i, 0);
+    tarjan(1, 0);
     for(int u = 1;u <= n;u++){
         for(int i = head[u];i;i = e[i].next){
             int v = e[i].to;
             if(scc[v] == scc[u]) continue;
-            nadd(scc[u], scc[v]);
+            nadd(u, v);
         }
     }
-
     cout << dis[bfs(bfs(scc[1]))];
 }
 
