@@ -1,0 +1,22 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const int N = 10010;
+int dp[N][N];
+int w[N];
+int n,m;
+int main(){
+    cin >> n >> m;
+    for(int i = 1;i <= n;i++){
+        cin >> w[i];
+    }
+    for(int i = 1; i <= n;i++){
+        for(int j = 1;j <= m;j++){
+            if(j == w[i]) dp[i][j] = dp[i-1][j] + 1;
+            if(j > w[i]) dp[i][j] = dp[i-1][j] + dp[i-1][j - w[i]];
+            if(j < w[i]) dp[i][j] = dp[i-1][j];
+        }
+    }
+    cout << dp[n][m] << endl;
+    return 0;
+}

@@ -1,0 +1,58 @@
+#include <iostream>
+#include <deque>
+#include <cstring>
+#include <vector>
+using namespace std;
+const int N = 10010;
+const int M = 2 * N;
+struct edge{int to,w;};
+
+vector<edge> e[M];
+int dis[N],step[N],n,m,ans;
+bool vis[N];
+
+void spfa(const int s){
+	deque<int> q;
+	memset(dis, 0x3f, sizeof dis);
+	memset(vis, false, sizeof vis);
+	q.push_front(s);
+	dis[s] = 0;
+	vis[s] = true;
+	while(!q.empty()){
+		int u = q.front();
+		q.pop_front();
+		vis[u] = false;
+		++step[u];
+		if(step[u] > n){
+			puts("Forever love");exit(0);
+			return;
+		}
+		for(auto v : e[u]){
+			if(dis[v.to] > dis[u] + v.w){
+				dis[v.to] = dis[u] + v.w;
+				if(!vis[v.to]){
+					vis[v.to] = true;
+					if(!q.empty() && dis[v.to] > dis[q.front()]){
+						q.push_front(v.to);
+					}else{
+						q.push_back(v.to);
+					}
+				}
+			}
+		}
+	}
+}
+
+int main(){
+	cin >> n >> m;
+	for(int i = 1;i <= m;i++){
+		int u,v,w; cin >> u >> v >> w;
+		e[u].push_back(edge{v,-w});
+	}
+	spfa(1);
+	ans = dis[n];
+	spfa(n);
+	ans = min(ans, dis[1]);
+	cout << ans << endl;N
+	return 0;
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const int N = 50010;
+struct edge{
+	int u,v,w;
+	bool operator<(const edge& a)const{
+		return w < a.w;
+	}
+} e[N];
+
+int p[N],n,m,s,t,res;
+
+int find(int s){
+	if(p[s] != s) p[s] = find(p[s]);
+	return p[s];
+}
+
+int main(){
+	cin >> n >> m >> s >> t;
+	for(int i = 1;i <= m;i++){
+		int u,v,w; cin >> u >> v >> w;
+		e[i] = edge{u,v,w};
+	}
+	for(int i = 1;i <= n;i++) p[i] = i;
+	sort(e+1, e+m+1);
+	for(int i = 1;i <= m;i++){
+		int u = e[i].u,v=e[i].v,w=e[i].w;
+		u = find(u);
+		v = find(v);
+		if(u != v){
+			p[u] = v;
+			// cout << w << endl;
+			// res = max(w, res);
+		}
+		if(find(s) == find(t)){
+			cout << w << endl;
+			return 0;
+		}
+	}
+	// cout << res << endl;
+	return 0;
+}
