@@ -1,4 +1,4 @@
-# **MapReduce**
+# MapReduce
 
 ## 概念
 
