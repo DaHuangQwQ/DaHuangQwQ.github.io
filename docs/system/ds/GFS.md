@@ -34,5 +34,20 @@
 
 > 必须要通过Chunk的主副本（Primary Chunk）来写入。
 
-1. 对于Master节点来说，如果发现Chunk的主副本不存在，Master会找出所有存有Chunk最新副本的Chunk服务器。
+1. 对于Master节点来说，如果发现 Chunk 的主副本不存在，Master 会找出所有存有 Chunk 最新副本的 Chunk 服务器。
 2. Master节点需要告诉客户端向哪个Chunk服务器（也就是Primary Chunk所在的服务器）去做追加操作。
+
+> 最新的副本是指，副本中保存的版本号与Master中记录的Chunk的版本号一致。Chunk副本中的版本号是由Master节点下发的，所以Master节点知道，对于一个特定的Chunk，哪个版本号是最新的。
+>
+> 当客户端想要对文件进行追加，但是又不知道文件尾的Chunk对应的Primary在哪时，Master会等所有存储了最新Chunk版本的服务器集合完成，然后挑选一个作为Primary，其他的作为Secondary。
+>
+> 它还给Primary一个租约，这个租约告诉Primary说，在接下来的60秒中，你将是Primary，60秒之后你必须停止成为Primary。这种机制可以确保我们不会同时有两个Primary
+
+3. 如果 Secondary 实际真的将数据写入到了本地磁盘存储的 Chunk 中，它会回复“yes”给 Primary。如果所有的 Secondary 服务器都成功将数据写入，并将“yes”回复给了 Primary，并且 Primary 也收到了这些回复。Primary 会向客户端返回写入成功。
+4. 如果至少一个 Secondary 服务器没有回复 Primary，或者回复了，但是内容却是：抱歉，一些不好的事情发生了，比如说磁盘空间不够，或者磁盘故障了，Primary 会向客户端返回写入失败。
+
+## GFS 一致性
+
+> GFS 是弱一致性
+
+在GFS的这种工作方式下，如果Primary返回写入成功，那么一切都还好，如果Primary返回写入失败，就不是那么好了。Primary返回写入失败会导致不同的副本有完全不同的数据。
