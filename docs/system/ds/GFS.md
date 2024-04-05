@@ -10,12 +10,12 @@
 
 ### Master 数据结构
 
-- 第一个是文件名到Chunk ID或者Chunk Handle**（NV）**数组的对应。这个表单告诉你，文件对应了哪些Chunk。但是只有Chunk ID是做不了太多事情的，所以有了第二个表单。
+- 第一个是文件名到Chunk ID或者Chunk Handle`（NV）`数组的对应。这个表单告诉你，文件对应了哪些Chunk。但是只有Chunk ID是做不了太多事情的，所以有了第二个表单。
 - 第二个表单记录了Chunk ID到Chunk数据的对应关系。这里的数据又包括了：
-  - 每个Chunk存储在哪些服务器上，所以这部分是Chunk服务器的列表**（V）**
-  - 每个Chunk当前的版本号，所以Master节点必须记住每个Chunk对应的版本号。**（NV）**
-  - 所有对于Chunk的写操作都必须在主Chunk（Primary Chunk）上顺序处理，主Chunk是Chunk的多个副本之一。所以，Master节点必须记住哪个Chunk服务器持有主Chunk。**（V）**
-  - 主Chunk只能在特定的租约时间内担任主Chunk，所以，Master节点要记住主Chunk的租约过期时间。**（V）**
+  - 每个Chunk存储在哪些服务器上，所以这部分是Chunk服务器的列表`（V）`
+  - 每个Chunk当前的版本号，所以Master节点必须记住每个Chunk对应的版本号。`（NV）`
+  - 所有对于Chunk的写操作都必须在主Chunk（Primary Chunk）上顺序处理，主Chunk是Chunk的多个副本之一。所以，Master节点必须记住哪个Chunk服务器持有主Chunk。`（V）`
+  - 主Chunk只能在特定的租约时间内担任主Chunk，所以，Master节点要记住主Chunk的租约过期时间。`（V）`
 
 ### Master 故障恢复
 
