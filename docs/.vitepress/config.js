@@ -24,7 +24,7 @@ export default {
                 link: "/guide/test"
             },
             {
-                text: "操作系统",
+                text: "系统",
                 link: "/system/index"
             },
             {
