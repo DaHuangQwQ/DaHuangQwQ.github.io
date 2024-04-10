@@ -220,6 +220,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	}
 	if rf.votedFor == -1 || rf.votedFor == args.CandidateId {
 		reply.VoteGranted = true
+    rf.votedFor = args.CandidateId
 		rf.LeaderId = -1
 		rf.persist()
 		rf.timer.Reset(GetRandTimer())
