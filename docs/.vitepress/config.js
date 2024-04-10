@@ -21,7 +21,7 @@ export default {
             },
             {
                 text: "学习笔记",
-                link: "/guide/test"
+                link: "/labnote/index"
             },
             {
                 text: "系统",
