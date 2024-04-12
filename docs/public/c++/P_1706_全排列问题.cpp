@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cstring>
 #include <queue>
+#include <iomanip>
 #include <vector>
 #endif
 using namespace std;
@@ -28,10 +29,28 @@ typedef pair<int, int> PII;
 
 const int N = 1e5 + 10;
 // 
-
+int n;
+vector<int> path;
+bool vis[N];
+void dfs(int deep){
+    if(deep == n){
+        for(auto p : path){
+            cout << std::setw(5) << p;
+        }cout << endl;
+    }
+    for(int i = 1;i <= n;i++){
+        if(vis[i]) continue;
+        vis[i] = true;
+        path.push_back(i);
+        dfs(deep + 1);
+        path.pop_back();
+        vis[i] = false;
+    }
+}
 
 void solve(){
-    
+    cin >> n;
+    dfs(0);
 }
 
 signed main(){
