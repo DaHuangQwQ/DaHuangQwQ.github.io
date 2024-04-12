@@ -28,10 +28,16 @@ typedef pair<int, int> PII;
 
 const int N = 1e5 + 10;
 // 
+int f[N];
+int w[N];
+int n, m;
 
 
 void solve(){
-    
+    cin >> m >> n;
+    for(int i = 1;i <= n;i++){
+        cin >> 
+    }
 }
 
 signed main(){
