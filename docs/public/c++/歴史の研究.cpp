@@ -1,0 +1,118 @@
+#ifdef ONLINE_JUDGE
+#include<bits/stdc++.h>
+#else
+#include <iostream>
+#include <stdio.h>
+#include <assert.h>
+#include <algorithm>
+#include <cstring>
+#include <queue>
+#include <vector>
+#endif
+using namespace std;
+#define ll long long
+#define endl "\n"
+#define INF 1e9
+typedef pair<int, int> PII;
+#define int ll
+
+#ifdef LOCAL_MACHINE
+	#define debug(format, arg...) printf(format, ##arg)
+	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%lld)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+	#define debug(format, arg...);
+	#define debug_info(format, ...)
+#endif
+
+#define zassert(x, s) \
+	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
+
+const int N = 1e6 + 10;
+// 
+int n, m, B;
+int block[N];
+struct node {
+    int l, r, id;
+    bool operator<(const node & a) const {
+        if(block[l] != block[a.l]) return l < a.l;
+        return r < a.r;
+    }
+} q[N];
+
+int cnt[N], sum;
+int a[N], b[N];
+int ans[N];
+
+void add(int x){
+    cnt[x]++;
+    sum = max(sum, cnt[x] * b[x]);
+}
+
+int c[N];
+ll calc(int l, int r){
+    ll res = 0;
+    for(int i = l; i <= r;i++) c[a[i]] = 0;
+    for(int i = l; i <= r;i++){
+        ++c[a[i]];
+        res = max(res, c[a[i]] * b[a[i]]);
+    }
+    return res;
+}
+
+void solve(){
+    // cin >> n >> m;
+    scanf("%lld %lld", &n, &m);
+    B = sqrt(n);
+    for(int i = 1;i <= n;i++){
+        // cin >> a[i];
+        scanf("%lld", &a[i]);
+        b[i] = a[i];
+        block[i] = (i - 1) / B + 1;
+    }
+    int num = block[n];
+    sort(b + 1, b + n + 1);
+    for(int i = 1;i <= n;i++){
+        a[i] = lower_bound(b+1, b+n+1, a[i]) - b;
+    }
+    for(int i = 1;i <= m;i++){
+        int l, r; 
+        // cin >> l >> r;
+        scanf("%lld %lld", &l, &r);
+        q[i] = (node){l, r, i};
+    }
+    sort(q+1, q+m+1);
+    for(int i = 1, x = 1;i <= num;i++){ // 第i块
+        sum = 0;
+        int last = 0;
+        for(int j = 1;j <= n;j++) cnt[j] = 0;
+        int R = min(B*i, n);
+        int l = R + 1, r = R;
+        for(;block[q[x].l] == i; x++){ // 第i块的查询x
+            if(block[q[x].l] == block[q[x].r]){
+                ans[q[x].id] = calc(q[x].l, q[x].r);
+                continue;
+            }
+            while(r < q[x].r) add(a[++r]); // 右扩展
+            last = sum;
+            while(l > q[x].l) add(a[--l]); // 左扩展
+            ans[q[x].id] = sum;
+            while(l <= r) --cnt[a[l++]]; // 回滚
+            sum = last;
+        }
+    }
+    for(int i = 1;i <= m;i++){
+        // cout << ans[i] << endl;
+        printf("%lld\n", ans[i]);
+    }
+}
+
+signed main(){
+    #ifdef ONLINE_JUDGE
+    // freopen("", "r", stdin);
+    #endif
+    // ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    int n = 1;
+    // cin >> n;
+    while(n--){solve();}
+    return 0;
+}
