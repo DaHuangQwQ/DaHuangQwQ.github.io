@@ -36,8 +36,9 @@ int n, m;
 void solve(){
     cin >> m >> n;
     for(int i = 1;i <= n;i++){
-        cin >> 
+        cin >> w[i];
     }
+    
 }
 
 signed main(){
