@@ -36,6 +36,9 @@ export default {
             { icon: 'github', link: 'https://github.com/DaHuangQwQ' },
             // { icon: 'twitter', link: '...' },
         ],
+        search: {
+            provider: 'local'
+        },
         // footer: {
         //     message: 'footer',
         //     copyright: ' © 2024-vitepress'

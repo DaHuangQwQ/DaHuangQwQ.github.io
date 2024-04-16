@@ -1,44 +1,50 @@
 {
-  "hash": "a906d83d",
-  "configHash": "1a9d46d2",
+  "hash": "3a3aad00",
+  "configHash": "3a330025",
   "lockfileHash": "49ee4b7e",
-  "browserHash": "0af6da8d",
+  "browserHash": "84a771f1",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "25b74185",
+      "fileHash": "a37b29c5",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "1b5dbb50",
+      "fileHash": "0acd8e35",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "7906baff",
+      "fileHash": "94575647",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/integrations/useFocusTrap": {
+      "src": "../../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
+      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
+      "fileHash": "cf0ff952",
+      "needsInterop": false
+    },
+    "vitepress > mark.js/src/vanilla.js": {
+      "src": "../../../../node_modules/mark.js/src/vanilla.js",
+      "file": "vitepress___mark__js_src_vanilla__js.js",
+      "fileHash": "a4a2043a",
+      "needsInterop": false
+    },
+    "vitepress > minisearch": {
+      "src": "../../../../node_modules/minisearch/dist/es/index.js",
+      "file": "vitepress___minisearch.js",
+      "fileHash": "253a0e22",
       "needsInterop": false
     },
     "@theme/index": {
       "src": "../../../../node_modules/vitepress/dist/client/theme-default/index.js",
       "file": "@theme_index.js",
-      "fileHash": "9576a910",
+      "fileHash": "ede59e99",
       "needsInterop": false
-    },
-    "directory-tree": {
-      "src": "../../../../node_modules/directory-tree/lib/directory-tree.js",
-      "file": "directory-tree.js",
-      "fileHash": "f57d9fb3",
-      "needsInterop": true
-    },
-    "path-browserify": {
-      "src": "../../../../node_modules/path-browserify/index.js",
-      "file": "path-browserify.js",
-      "fileHash": "19425018",
-      "needsInterop": true
     }
   },
   "chunks": {
@@ -47,9 +53,6 @@
     },
     "chunk-3YS4HNIT": {
       "file": "chunk-3YS4HNIT.js"
-    },
-    "chunk-Y2F7D3TJ": {
-      "file": "chunk-Y2F7D3TJ.js"
     }
   }
 }
