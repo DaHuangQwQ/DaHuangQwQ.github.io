@@ -14,8 +14,6 @@ using namespace std;
 #define endl "\n"
 #define INF 1e9
 typedef pair<int, int> PII;
-const int MOD = 1000000007;
-#define int ll
 
 #ifdef LOCAL_MACHINE
 	#define debug(format, arg...) printf(format, ##arg)
@@ -28,47 +26,42 @@ const int MOD = 1000000007;
 #define zassert(x, s) \
 	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
 
-const int N = 1e5 + 10;
+const int N = 1e3 + 10;
 // 
-ll n, k;
-struct matrix{
-    ll c[101][101];
-    matrix(){memset(c, 0, sizeof c);}
-} a, res;
-
-matrix operator*(matrix &x, matrix &y){
-    matrix t;
-    for(int i = 1; i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            for(int k = 1; k <= n;k++){
-                t.c[i][j] = (t.c[i][j] + x.c[i][k] * y.c[k][j]) % MOD;
-            }
+int n;
+typedef vector<int> vi;
+vi a(N), res(N);
+int p;
+vi mul(vi a, vi b){
+    vi t(2*N);
+    for(int i = 0; i <= N;i++){
+        for(int j = 0;j <= N;j++){
+            t[i + j] += a[i] * b[j];
+            t[i + j + 1] += t[i + j] / 10;
+            t[i + j] %= 10;
         }
     }
     return t;
 }
 
-void quick(ll p){
-    for(int i = 1;i <= n;i++) res.c[i][i] = 1;
+void quick(int p){
+    res[0] = 1;
+    a[0] = 2;
     while(p){
-        if(p & 1) res = res * a;
-        a = a * a;
+        if(p & 1) res = mul(a, res);
+        a = mul(a, a);
         p >>= 1;
     }
+    res[0]--; // 个位修正
 }
 
 void solve(){
-    cin >> n >> k;
-    for(int i = 1;i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            cin >> a.c[i][j];
-        }
-    }
-    quick(k);
-    for(int i = 1;i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            cout << res.c[i][j] << " ";
-        }
+    cin >> n;
+    cout << int(n * log10(2) + 1) << endl;
+    quick(n);
+    for(int i=0, k = 499; i < 10; i++){
+        for(int j = 0; j < 50; j++, k--)
+            cout << res[k];
         cout << endl;
     }
 }

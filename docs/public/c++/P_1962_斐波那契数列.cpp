@@ -14,8 +14,8 @@ using namespace std;
 #define endl "\n"
 #define INF 1e9
 typedef pair<int, int> PII;
-const int MOD = 1000000007;
 #define int ll
+const int MOD = 1000000007;
 
 #ifdef LOCAL_MACHINE
 	#define debug(format, arg...) printf(format, ##arg)
@@ -30,26 +30,24 @@ const int MOD = 1000000007;
 
 const int N = 1e5 + 10;
 // 
-ll n, k;
+int n, m;
 struct matrix{
-    ll c[101][101];
+    ll c[3][3];
     matrix(){memset(c, 0, sizeof c);}
 } a, res;
 
 matrix operator*(matrix &x, matrix &y){
     matrix t;
-    for(int i = 1; i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            for(int k = 1; k <= n;k++){
+    for(int i = 1;i <= n;i++)
+        for(int j = 1;j <= n;j++)
+            for(int k = 1;k <= n;k++)
                 t.c[i][j] = (t.c[i][j] + x.c[i][k] * y.c[k][j]) % MOD;
-            }
-        }
-    }
     return t;
 }
 
-void quick(ll p){
-    for(int i = 1;i <= n;i++) res.c[i][i] = 1;
+void quick(int p){
+    res.c[1][2] = res.c[1][1] = 1;
+    a.c[1][1] = a.c[1][2] = a.c[2][1] = 1;
     while(p){
         if(p & 1) res = res * a;
         a = a * a;
@@ -58,19 +56,14 @@ void quick(ll p){
 }
 
 void solve(){
-    cin >> n >> k;
-    for(int i = 1;i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            cin >> a.c[i][j];
-        }
+    cin >> m;
+    if(m <= 2){
+        cout << 1 << endl;
+        return;
     }
-    quick(k);
-    for(int i = 1;i <= n;i++){
-        for(int j = 1;j <= n;j++){
-            cout << res.c[i][j] << " ";
-        }
-        cout << endl;
-    }
+    n = 2;
+    quick(m - 2);
+    cout << res.c[1][1] << endl;
 }
 
 signed main(){
