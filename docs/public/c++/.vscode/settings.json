@@ -52,6 +52,7 @@
         "__tree": "cpp",
         "map": "cpp",
         "regex": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "sstream": "cpp"
     }
 }
