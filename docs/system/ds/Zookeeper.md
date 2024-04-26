@@ -60,9 +60,9 @@ Zookeeper的API某种程度上来说像是一个文件系统。它有一个层�
 
 这里的文件和目录都被称为znodes。Zookeeper中包含了3种类型的znode，了解他们对于解决问题会有帮助。
 
-1. 第一种Regular znodes。这种znode一旦创建，就永久存在，除非你删除了它。
-2. 第二种是Ephemeral znodes。如果Zookeeper认为创建它的客户端挂了，它会删除这种类型的znodes。这种类型的znodes与客户端会话绑定在一起，所以客户端需要时不时的发送心跳给Zookeeper，告诉Zookeeper自己还活着，这样Zookeeper才不会删除客户端对应的ephemeral znodes。
-3. 最后一种类型是Sequential znodes。它的意思是，当你想要以特定的名字创建一个文件，Zookeeper实际上创建的文件名是你指定的文件名再加上一个数字。当有多个客户端同时创建Sequential文件时，Zookeeper会确保这里的数字不重合，同时也会确保这里的数字总是递增的。
+1. Regular znodes。这种znode一旦创建，就永久存在，除非你删除了它。
+2. Ephemeral znodes。如果Zookeeper认为创建它的客户端挂了，它会删除这种类型的znodes。这种类型的znodes与客户端会话绑定在一起，所以客户端需要时不时的发送心跳给Zookeeper，告诉Zookeeper自己还活着，这样Zookeeper才不会删除客户端对应的ephemeral znodes。
+3. Sequential znodes。它的意思是，当你想要以特定的名字创建一个文件，Zookeeper实际上创建的文件名是你指定的文件名再加上一个数字。当有多个客户端同时创建Sequential文件时，Zookeeper会确保这里的数字不重合，同时也会确保这里的数字总是递增的。
 
 Zookeeper以RPC的方式暴露以下API。
 
@@ -72,3 +72,40 @@ Zookeeper以RPC的方式暴露以下API。
 - `GETDATA(PATH，WATCH)`。入参分别是文件的全路径名PATH，和WATCH标志位。这里的watch监听的是文件的内容的变化。
 - `SETDATA(PATH，DATA，VERSION)`。入参分别是文件的全路径名PATH，数据DATA，和版本号VERSION。如果你传入了version，那么Zookeeper当且仅当文件的版本号与传入的version一致时，才会更新文件。
 - `LIST(PATH)`。入参是目录的路径名，返回的是路径下的所有文件。
+
+## 使用Zookeeper实现计数器
+
+````cpp
+WHILE TRUE:
+    X, V = GETDATA("F")
+    IF SETDATA("f", X + 1, V):
+        BREAK
+````
+
+
+
+## 使用Zookeeper实现非扩展锁
+
+```cpp
+WHILE TRUE:
+    IF CREATE("f", data, ephemeral=TRUE): RETURN
+    IF EXIST("f", watch=TRUE):
+        WAIT
+```
+
+
+
+## 使用Zookeeper实现可扩展锁
+
+```cpp
+CREATE("f", data, sequential=TRUE, ephemeral=TRUE)
+WHILE TRUE:
+    LIST("f*")
+    IF NO LOWER #FILE: RETURN
+    IF EXIST(NEXT LOWER #FILE, watch=TRUE):
+        WAIT
+```
+
+
+
+以上就是对于Zookeeper的一些介绍。有两点需要注意：第一是Zookeeper聪明的从多个副本读数据从而提升了性能，但同时又牺牲了一些一致性；另一个是Zookeeper的API设计，使得Zookeeper成为一个通用的协调服务，这是一个简单的put/get 服务所不能实现，这些API使你可以写出类似mini-transaction的代码，也可以帮你创建自己的锁。
