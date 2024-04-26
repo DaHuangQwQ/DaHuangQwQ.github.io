@@ -37,7 +37,7 @@ export default {
             // { icon: 'twitter', link: '...' },
         ],
         search: {
-            provider: 'local'
+            // provider: 'local'
         },
         // footer: {
         //     message: 'footer',
