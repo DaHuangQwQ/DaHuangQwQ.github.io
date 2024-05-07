@@ -1,0 +1,82 @@
+#ifdef ONLINE_JUDGE
+#include<bits/stdc++.h>
+#else
+#include <iostream>
+#include <stdio.h>
+#include <assert.h>
+#include <algorithm>
+#include <cstring>
+#include <queue>
+#include <vector>
+#endif
+using namespace std;
+#define ll long long
+#define endl "\n"
+#define INF 1e9
+typedef pair<int, int> PII;
+
+#ifdef LOCAL_MACHINE
+	#define debug(format, arg...) printf(format, ##arg)
+	#define debug_info(format, ...) printf("\033[1m\033[45;33m Info:[%s:%s(%d)]: \033[0m" format "\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+	#define debug(format, arg...);
+	#define debug_info(format, ...)
+#endif
+
+#define zassert(x, s) \
+	do { if ((x) == 0) { printf("%s\n", s); assert((x)); } } while (0)
+
+const int N = 1e5 + 10;
+// 
+int n, m, k;
+struct Edge {
+    int to, next;
+} e[N << 1];
+int head[N];
+void add(int u, int v){
+    static int idx = 1;
+    e[++idx] = (Edge){v, head[u]};
+    head[u] = idx;
+}
+
+bool vis[N];
+int match[N];
+
+bool dfs(int u){
+    for(int i = head[u];i;i = e[i].next){
+        int v = e[i].to;
+        if(vis[v]) continue;
+        vis[v] = true;
+        // 看能不能让出这个妹子
+        if(!match[v] || dfs(match[v])){ // [!code warning]
+            match[v] = u;
+            return true;
+        }
+    }
+    return false;
+}
+
+int res;
+void solve(){
+    cin >> n >> m >> k;
+    for(int i = 1;i <= k;i++){
+        int u,v; cin >> u >> v;
+        add(u, v);
+    }
+    for(int i = 1;i <= n;i++){
+        memset(vis, false, sizeof vis);
+        if(dfs(i)) res ++;
+    }
+    cout << res << endl;
+}
+
+signed main(){
+    #ifdef ONLINE_JUDGE
+    // freopen("", "r", stdin);
+    #endif
+    ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    int n = 1;
+    // cin >> n;
+    while(n--){solve();}
+    return 0;
+}
