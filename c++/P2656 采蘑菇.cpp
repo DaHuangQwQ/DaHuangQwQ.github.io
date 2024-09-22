@@ -1,0 +1,100 @@
+#include <iostream>
+#include <deque>
+#include <vector>
+#include <cstring>
+#include <stack>
+#include <algorithm>
+using namespace std;
+const int N = 100010;
+const int M = 2 * N;
+struct edge{int to, w;double rate;};
+
+vector<edge> e[M];
+int dis[N],n,m,s;
+long long ans;
+bool vis[N],vi[N];
+int dfn[N],low[N],cnt,tot,col[N]; // 增加了一个用于记录缩点后的颜色数组
+
+void tarjan(int u){
+	dfn[u] = low[u] = ++cnt;
+	stack<int> st;
+	vi[u] = true;
+	st.push(u);
+	for(auto v : e[u]){
+		if(!dfn[v.to]){
+			tarjan(v.to);
+			low[u] = min(low[u], low[v.to]);
+		}else if(vi[v.to]){
+			low[u] = min(low[u], dfn[v.to]);
+		}
+	}
+	if(low[u] == dfn[u]){
+		tot++;
+        int v;
+        do {
+            v = st.top();
+            st.pop();
+            col[v] = tot;
+            vi[v] = false;
+        } while (v != u);
+	}
+}
+
+void spfa(const int s){
+	deque<int> q;
+	memset(dis, 0, sizeof dis);
+	memset(vis,false, sizeof vis);
+	q.push_front(s);
+	dis[s] = 0;
+	vis[s] = true;
+	while(!q.empty()){
+		int u = q.front();
+		q.pop_front();
+		vis[u] = false;
+		for(auto v : e[u]){
+			if(dis[v.to] < dis[u] + v.w){
+				dis[v.to] = dis[u] + v.w;
+				v.w *= v.rate;
+				if(!vis[v.to]){
+					vis[v.to] = true;
+					if(!q.empty() && dis[v.to] > dis[q.front()]){
+						q.push_front(v.to);
+					}else{
+						q.push_back(v.to);
+					}
+				}
+			}
+		}
+	}
+}
+
+int main(){
+	cin >> n >> m;
+	for(int i = 1;i <= m; i++){
+		int u , v, w;
+		double rate;
+		cin >> u >> v >> w >> rate;
+		e[u].push_back(edge{v,w,rate});
+	}
+	cin >> s;
+	spfa(s);
+	for (int i = 1; i <= n; i++) {
+        if (!dfn[i]) {
+            tarjan(i);
+        }
+    }
+    vector<long long> sum(tot+1,0);
+    for(int i = 1;i <= n;i++){
+    	int u = col[i];
+    	for(auto v : e[i]){
+    		sum[v.to] = max(sum[v.to], sum[u] + v.w);
+    	}
+    }
+	for(int i = 1;i <= n;i++){
+		if(i != s){
+			ans = max(ans, dis[i] + sum[col[i]]);
+		}
+	}
+	cout << ans << endl;
+	return 0;
+}

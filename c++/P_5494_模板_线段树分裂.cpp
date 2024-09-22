@@ -1,0 +1,79 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+#define ll long long
+#define mid ((l+r)>>1)
+const int N=200005;
+int n,m,tot,root[N];
+int ls[N*22],rs[N*22]; ll sum[N*22]; //权值个数
+
+int merge(int x,int y){ //合并
+  if(!x||!y) return x+y;
+  sum[x]+=sum[y];
+  ls[x]=merge(ls[x],ls[y]);
+  rs[x]=merge(rs[x],rs[y]);
+  return x;
+}
+void split(int x,int &y,ll k){ //分裂
+  //将x从k处斩断，前k小的归x，后面的归y
+  if(sum[x]==k) return;
+  y=++tot; //开点
+  ll s=sum[ls[x]];
+  //swap:右子树归y，x的右子树变成0
+  if(k<=s) split(ls[x],ls[y],k),swap(rs[x],rs[y]);
+  else split(rs[x],rs[y],k-s);
+  sum[y]=sum[x]-k; sum[x]=k;
+}
+void change(int &u,int l,int r,int p,int k){ //点修
+  if(!u) u=++tot; //开点
+  sum[u]+=k;
+  if(l==r) return;
+  if(p<=mid) change(ls[u],l,mid,p,k);
+  else change(rs[u],mid+1,r,p,k);
+}
+ll query(int u,int l,int r,int x,int y){ //区查
+  if(x>r||y<l) return 0;
+  if(x<=l&&r<=y) return sum[u];
+  return query(ls[u],l,mid,x,y)+query(rs[u],mid+1,r,x,y);
+}
+int kth(int u,int l,int r,int k){ //第k小
+  if(l==r) return l;
+  if(k<=sum[ls[u]]) return kth(ls[u],l,mid,k);
+  else return kth(rs[u],mid+1,r,k-sum[ls[u]]);
+}
+int main(){
+  scanf("%d%d",&n,&m);int op,p,x,y,cnt=1;
+  for(int i=1;i<=n;i++)
+    scanf("%d",&x),change(root[1],1,n,i,x);
+  for(int i=1;i<=m;i++){
+    scanf("%d",&op);
+    if(op==0){ //[x,y]移动到新可重集cnt
+      scanf("%d%d%d",&p,&x,&y);
+      ll k1=query(root[p],1,n,1,y), //[1,y]的个数
+         k2=query(root[p],1,n,x,y); //[x,y]的个数
+      int tmp=0;
+      split(root[p],root[++cnt],k1-k2);
+      split(root[cnt],tmp,k2);
+      root[p]=merge(root[p],tmp);
+    }
+    else if(op==1){ //可重集y放入x
+      scanf("%d%d",&x,&y);
+      root[x]=merge(root[x],root[y]);
+    }
+    else if(op==2){ //加入x个数字y
+      scanf("%d%d%d",&p,&x,&y);
+      change(root[p],1,n,y,x);
+    }
+    else if(op==3){ //查询[x,y]个数
+      scanf("%d%d%d",&p,&x,&y);
+      printf("%lld\n",query(root[p],1,n,x,y));
+    }
+    else{ //查询第x小
+      scanf("%d%d",&p,&x);
+      if(sum[root[p]]<x) printf("-1\n");
+      else printf("%d\n",kth(root[p],1,n,x));
+    }
+  }
+}
