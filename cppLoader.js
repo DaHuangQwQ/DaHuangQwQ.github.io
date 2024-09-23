@@ -12,7 +12,7 @@ files.forEach(file => {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
 
     const fileStats = fs.statSync(filePath);
-    const fileCreationDate = fileStats.birthtime.toISOString().split('T')[0]; // 获取文件创建时间，精确到日
+    const fileCreationDate = fileStats.birthtime.toISOString().split('T')[0].slice(0, 7); // 获取文件创建时间，精确到日
 
     const outputDir = path.join(outputBaseDir, fileCreationDate); // 根据文件创建时间创建文件夹
     if (!fs.existsSync(outputDir)) {
