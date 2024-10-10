@@ -18,10 +18,10 @@ features:
     link: /start
     linkText: 了解更多
   - icon: ⚡️
-    title: Another cool feature
+    title: Another Algorithm
     details: Lorem ipsum...
   - icon: 🌞
-    title: Another cool feature
+    title: Another Golang
     details: Lorem ipsum...
 ---
 

@@ -16,7 +16,7 @@ export default {
     themeConfig: {
         nav: [
             {
-                text: "资源",
+                text: "算法题解",
                 link: "/cpp/index"
             },
             {
@@ -24,7 +24,7 @@ export default {
                 link: "/labnote/index"
             },
             {
-                text: "系统",
+                text: "系统知识",
                 link: "/system/index"
             },
             {
@@ -37,7 +37,7 @@ export default {
             // { icon: 'twitter', link: '...' },
         ],
         search: {
-            // provider: 'local'
+            provider: 'local'
         },
         // footer: {
         //     message: 'footer',
