@@ -59,7 +59,7 @@ Gin + Gorm + Kafka + Mysql + Redis + MongoDB + GRPC
 - 实现了较高性能和高可用性打赏支付系统，实现了打赏-支付-记账三者对账机制和记账的幂等性
 - 采用了ElasticSearch 实现高可用的搜索、标签服务
 - 采用了推拉混合模型实现 feed 流，利用业务特征来优化写扩散和读扩散
-- 采用了 opneIM 系统，并使用 canal 监听 binlog 来同步用户信息
+- 采用了 openIM 系统，并使用 canal 监听 binlog 来同步用户信息
 
 
 
