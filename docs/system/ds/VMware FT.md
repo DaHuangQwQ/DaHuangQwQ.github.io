@@ -4,11 +4,11 @@
 >
 > 虚拟机监控器（VMM，Virtual Machine Monitor）
 >
-> VMware FT论文中将Primary到Backup之间同步的数据流的通道称之为Log Channel
+> VMware FT论文中将 Primary 到 Backup 之间同步的数据流的通道称之为Log Channel
 
-Fail-stop是一种容错领域的通用术语。它是指，如果某些东西出了故障，比如说计算机，那么它会单纯的停止运行。当任何地方出现故障时，就停止运行，而不是运算出错误结果。
+Fail-stop 是一种容错领域的通用术语。它是指，如果某些东西出了故障，比如说计算机，那么它会单纯的停止运行。当任何地方出现故障时，就停止运行，而不是运算出错误结果。
 
-假设 我们有两个副本，一个Primay和一个Backup节点
+假设 我们有两个副本，一个Primay 和一个 Backup 节点
 
 ## 状态转移和复制状态机（State Transfer and Replicated State Machine）
 
@@ -36,7 +36,7 @@ VMware FT 的独特之处在于，它从机器级别实现复制，因此它不�
    - VMM 会将网络数据包拷贝一份，并通过网络送给 Backup 虚机所在的 VMM。
 3. Backup 虚机所在的 VMM 知道这是发送给 Backup 虚机的网络数据包，它也会在 Backup 虚机中模拟网络数据包到达的中断，以将数据发送给应用程序的 Backup。所以现在，Primary 和 Backup 都有了这个网络数据包，它们有了相同的输入，再加上许多细节，它们将会以相同的方式处理这个输入，并保持同步。
 4. 虚机内的服务会回复客户端的请求。在 Primary 虚机里面，服务会生成一个回复报文，并通过 VMM 在虚机内模拟的虚拟网卡发出。之后 VMM 可以看到这个报文，它会实际的将这个报文发送给客户端。另一方面，由于 Backup 虚机运行了相同顺序的指令，它也会生成一个回复报文给客户端，并将这个报文通过它的 VMM 模拟出来的虚拟网卡发出。但是它的 VMM 知道这是 Backup 虚机，会丢弃这里的回复报文。
-5. 当 Primary 因为故障停止运行时，FT（Fault-Tolerance）就开始工作了。从Backup的角度来说，它将不再收到来自于 Log Channel 上的 Log 条目（实际中，Backup 每秒可以收到很多条 Log，其中一个来源就是来自于 Primary 的定时器中断）Primary 一定是挂了。当Backup 不再从 Primary 收到消息，VMware FT 论文的描述是，Backup 虚机会上线（Go Alive）。
+5. 当 Primary 因为故障停止运行时，FT（Fault-Tolerance）就开始工作了。从 Backup 的角度来说，它将不再收到来自于 Log Channel 上的 Log 条目（实际中，Backup 每秒可以收到很多条 Log，其中一个来源就是来自于 Primary 的定时器中断）Primary 一定是挂了。当Backup 不再从 Primary 收到消息，VMware FT 论文的描述是，Backup 虚机会上线（Go Alive）。
 
 ## 非确定性事件（Non-Deterministic Events）
 
@@ -64,8 +64,6 @@ VMware FT 的独特之处在于，它从机器级别实现复制，因此它不�
 ## 输出控制（Output Rule）
 
 假设 Primary 确实生成了回复给客户端，但是之后立马崩溃了。更糟糕的是，现在网络不可靠，Primary 发送给 Backup 的 Log 条目在Primary 崩溃时也丢包了。那么现在的状态是，客户端收到了回复说现在的数据是11，但是 Backup 虚机因为没有看到客户端请求，所以它保存的数据还是10。
-
-
 
 论文里的解决方法就是控制输出（Output Rule）。直到Backup虚机确认收到了相应的Log条目，Primary虚机不允许生成任何输出。让我们回到Primary崩溃前，并且计数器的内容还是10，Primary上的正确的流程是这样的：
 
