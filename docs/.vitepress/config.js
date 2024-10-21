@@ -16,21 +16,21 @@ export default {
     themeConfig: {
         nav: [
             {
-                text: "算法题解",
-                link: "/cpp/index"
+                text: "系统知识",
+                link: "/system/index"
             },
             {
                 text: "学习笔记",
                 link: "/labnote/index"
             },
             {
-                text: "系统知识",
-                link: "/system/index"
-            },
-            {
                 text: "算法",
                 link: "/algorithm/index"
-            }
+            },
+            {
+                text: "算法题解",
+                link: "/cpp/index"
+            },
         ],
         socialLinks: [
             { icon: 'github', link: 'https://github.com/DaHuangQwQ' },
