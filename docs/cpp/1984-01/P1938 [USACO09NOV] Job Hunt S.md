@@ -1,4 +1,4 @@
-# P1938 [USACO09NOV] Job Hunt S
+# P1938 Job Hunt S
 
 <style scoped>
 @import '/public/css/cpp.css';

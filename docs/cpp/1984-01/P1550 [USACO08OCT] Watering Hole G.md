@@ -1,8 +1,5 @@
-# P1550 [USACO08OCT] Watering Hole G
+# P1550 Watering Hole G
 
-<style scoped>
-@import '/public/css/cpp.css';
-</style>
 
 
 ```cpp

@@ -1,4 +1,4 @@
-# P5837 [USACO19DEC] Milk Pumping G
+# P5837 Milk Pumping G
 
 <style scoped>
 @import '/public/css/cpp.css';

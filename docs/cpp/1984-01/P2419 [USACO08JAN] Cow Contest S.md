@@ -1,4 +1,4 @@
-# P2419 [USACO08JAN] Cow Contest S
+# P2419 Cow Contest S
 
 <style scoped>
 @import '/public/css/cpp.css';
