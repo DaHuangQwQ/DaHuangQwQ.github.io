@@ -1,1 +1,0 @@
-import{_ as i,c as l,o as a,V as e}from"./chunks/framework.WykxUCM3.js";const f=JSON.parse('{"title":"个人简介","description":"","frontmatter":{},"headers":[],"relativePath":"aboutme.md","filePath":"aboutme.md"}'),o={name:"aboutme.md"},t=e("",21),r=[t];function s(n,d,u,c,p,h){return a(),l("div",null,r)}const g=i(o,[["render",s]]);export{f as __pageData,g as default};
