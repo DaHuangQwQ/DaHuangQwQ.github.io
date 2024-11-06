@@ -348,7 +348,7 @@ http://pdfmake.org/
 https://pdf-lib.js.org/
 * uppy
  JavaScript 文件上传器
- https://uppy.io/
+  https://uppy.io/
 ### 音视频
 * moovie.js
 专注于电影的 HTML5 播放器
@@ -364,7 +364,7 @@ HTML5 FLV 播放器
 https://github.com/Bilibili/flv.js/
 * plyr
  HTML5、YouTube 和 Vimeo 播放器
- https://plyr.io/
+  https://plyr.io/
 * xgplayer 西瓜播放器
 网络视频和音频播放器库
 https://h5player.bytedance.com/
@@ -552,7 +552,7 @@ https://github.com/jahnli/awesome-flutter-plugins
 https://flutter-widget.live/basics/introduction
 * google Icons
  Google Material Design 图标
- https://fonts.google.com/icons
+  https://fonts.google.com/icons
 * Json To Dart Model
 Json 转 Dart Model类
 https://ashamp.github.io/jsonToDartModel/
