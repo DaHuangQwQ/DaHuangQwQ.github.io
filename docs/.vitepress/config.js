@@ -1,4 +1,5 @@
 import AutoSidebar from "@iminu/vitepress-plugin-auto-sidebar";
+import { createHydrationRenderer } from "vue";
 
 
 export default {
