@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as r,V as t}from"./chunks/framework.WykxUCM3.js";const m=JSON.parse('{"title":"GFS","description":"","frontmatter":{},"headers":[],"relativePath":"system/ds/GFS.md","filePath":"system/ds/GFS.md"}'),n={name:"system/ds/GFS.md"},l=t("",19),i=[l];function o(h,u,s,k,c,C){return r(),e("div",null,i)}const p=a(n,[["render",o]]);export{m as __pageData,p as default};

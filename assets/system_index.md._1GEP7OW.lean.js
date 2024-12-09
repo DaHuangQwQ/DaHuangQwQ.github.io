@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as r,V as a}from"./chunks/framework.WykxUCM3.js";const k=JSON.parse('{"title":"主页","description":"","frontmatter":{},"headers":[],"relativePath":"system/index.md","filePath":"system/index.md"}'),s={name:"system/index.md"},l=a("",14),o=[l];function i(n,p,h,c,f,d){return r(),t("div",null,o)}const m=e(s,[["render",i]]);export{k as __pageData,m as default};
