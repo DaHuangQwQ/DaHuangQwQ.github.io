@@ -16,7 +16,7 @@
 
 国级三等奖 	第十五届蓝桥杯                                   									 
 
-国级铜牌 		第十八届东北地区大学生程序设计竞赛(CCPC)                      
+国级铜牌 		第十八届东北地区大学生程序设计竞赛 (CCPC 区域赛)                      
 
 省级二等奖 	2023高教社杯全国大学生数学建模竞赛                         		
 
@@ -33,7 +33,7 @@
 - 熟悉 TCP/IP，UDP，HTTP/HTTPS，QUIC 等网络协议，熟悉 TCP 流量控制、拥塞控制
 - 熟悉 IO 多路复用技术（select/poll/epoll）底层原理
 - Docker 和 Kubernetes：熟练使用Docker进行容器化部署，了解 K8S 的基本概念
-- 设计和开发方法：熟悉领域驱动设计(DDD)、测试驱动开发(TDD)、和一些设计模式，如 option、builder、责任链、装饰器模式等等，了解事件驱动开发
+- 设计和开发方法：熟悉领域驱动设计(DDD)、测试驱动开发(TDD)、和一些设计模式，如 option、builder、洋葱模式、singleflight 模式、装饰器模式等等，了解事件驱动开发
 - Linux 和 git：熟练使用 Linux 和 git 基本操作
 
 ## 项目经验
@@ -42,7 +42,7 @@
 
 **框架技术**
 
-Gin + Gorm +  GRPC + Kafka + Mysql + Canal + Redis + Prometheus + ELK
+Gin + Gorm +  GRPC + Kafka + Mysql + Canal + Redis + Prometheus + ELK + Cron + Docker + Viper
 
 **项目描述**
 
@@ -58,7 +58,7 @@ Gin + Gorm +  GRPC + Kafka + Mysql + Canal + Redis + Prometheus + ELK
 - 采用了 openIM 系统，并使用 canal 监听 binlog 来同步用户信息
 - 采用了Prometheus，Zipkin，Grafana，ELK进行监控和报警，提高系统可观测性
 
-### 云原生数据库代理（在做）
+### 云原生数据库代理
 
 **项目特点**
 
