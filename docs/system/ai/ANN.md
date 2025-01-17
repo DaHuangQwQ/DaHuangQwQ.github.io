@@ -147,6 +147,105 @@ $$
 
 其中 η 是学习率
 
+## 梯度下降法优化
+
+### 随机梯度下降（mini-batch）
+
+随机挑一个批次进行训练
+
+### 牛顿法
+
+通过 **二阶信息**（Hessian 矩阵）来加速梯度下降优化过程
+
+**二阶导数（Hessian）**：描述了函数在某一点的“弯曲”程度。它告诉我们在某个方向上，函数是否上升得更快或下降得更快，也可以反映出函数的曲率
+
+没有学习率
+$$
+\theta_{n+1} = \theta_n - H^{-1} \nabla L(\theta_n)
+$$
+
+$$
+H = \begin{bmatrix}
+\frac{\partial^2 L}{\partial \theta_1^2} & \frac{\partial^2 L}{\partial \theta_1 \partial \theta_2} & \cdots & \frac{\partial^2 L}{\partial \theta_1 \partial \theta_m} \\
+\frac{\partial^2 L}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 L}{\partial \theta_2^2} & \cdots & \frac{\partial^2 L}{\partial \theta_2 \partial \theta_m} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 L}{\partial \theta_m \partial \theta_1} & \frac{\partial^2 L}{\partial \theta_m \partial \theta_2} & \cdots & \frac{\partial^2 L}{\partial \theta_m^2}
+\end{bmatrix}
+$$
+
+
+
+### 动量法
+
+用历史数据去修正分量减少震动
+$$
+\Delta W(t)i = \frac{\partial J(W(t-1)i)}{\partial W_i}
+$$
+
+$$
+\mathbf{V}(t) = \beta \cdot \mathbf{V}(t-1) + (1 - \beta) \cdot \Delta W(t)i
+$$
+
+$$
+\mathbf{W}(t)i = \mathbf{W}(t-1)i - \eta \cdot \mathbf{V}(t)
+$$
+
+beta 很久之前的数据对当前的影响很小
+
+![image-20250117124906411](./assets/image-20250117124906411.png)
+
+### Nesterov
+
+用预测未来的数据去修正分量
+$$
+v_{t+1} = \beta v_t + \eta \nabla_\theta L(\theta_t - \beta v_t)
+$$
+
+$$
+\theta_{t+1} = \theta_t - v_{t+1}
+$$
+
+
+$$
+\theta_t 是当前的参数 \\
+\mathbf{v}_t 是动量（更新的速度）\\
+\beta 是动量系数，控制动量的影响程度（通常 0 \leq \beta < 1）\\
+\eta 是学习率 \\
+\nabla_\theta L(\theta_t - \beta \mathbf{v}_t) 是对预测位置（即考虑了动量的参数）计算的梯度。
+$$
+
+### AdaGrad
+
+基于历史数据学习率自适应，适合稀疏数据，纬度越高一般越稀疏（依赖于纬度而不是纵深）
+$$
+G_t = G_{t-1} + \nabla_\theta L(\theta_t)^2
+$$
+
+$$
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot \nabla_\theta L(\theta_t)
+$$
+
+ϵ 是一个小常数，用于防止除零错误
+
+### RMSprop
+
+解决了 AdaGrad 中学习率持续衰减的问题，减少了过久历史数据的影响
+$$
+G_t = \beta G_{t-1} + (1 - \beta) \nabla_\theta L(\theta_t)^2
+$$
+
+$$
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot \nabla_\theta L(\theta_t)
+$$
+
+### Adam
+
+RMSprop 和 动量法的结合
+
+### Nadam
+
+RMSprop 和 Nesterov 法的结合
+
 ## Softmax
 
 **前言**
