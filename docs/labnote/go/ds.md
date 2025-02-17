@@ -89,7 +89,7 @@
 
 
 
-![img](/Users/dahuang/Documents/hjywiki/docs/labnote/go/assets/f6d9844b-0007-45f9-95c0-76e02ae145cb.png)
+![img](./assets/f6d9844b-0007-45f9-95c0-76e02ae145cb.png)
 
 
 
