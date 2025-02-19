@@ -82,7 +82,7 @@ Go中的切片是如何实现扩容的，这就需要关注一下Go的版本
 
 本质是⼀个阻塞循环队列
 
-![IMG_1007](./assets/IMG_1007.png)
+![IMG_1007](./assets/channel.png)
 
 ```go
 type hchan struct {
