@@ -1,4 +1,4 @@
-# langchain
+# LangChain
 
 ## LangSmith
 
